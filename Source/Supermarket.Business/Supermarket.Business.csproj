@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Supermarket.Common\Supermarket.Common.csproj" />
+    <ProjectReference Include="..\Supermarket.DataAccess\Supermarket.DataAccess.csproj" />
+    <ProjectReference Include="..\Supermarket.Domain\Supermarket.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
