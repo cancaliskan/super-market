@@ -1,11 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 
+using Supermarket.Common.Helpers;
 using Supermarket.Domain.Entities;
 
 namespace Supermarket.DataAccess.Context
 {
     public class ApplicationDbContext : DbContext
     {
+        public DbSet<User> Users { get; set; }
+        public DbSet<SalesInformation> SalesInformation { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductBasket> ProductBaskets { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
@@ -29,12 +37,24 @@ namespace Supermarket.DataAccess.Context
             // One Product has many Baskets
             // One Basket has many Products
             modelBuilder.Entity<ProductBasket>().HasKey(x => new { x.ProductId, x.BasketId });
-        }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<SalesInformation> SalesInformation { get; set; }
-        public DbSet<Basket> Baskets { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<ProductBasket> ProductBaskets { get; set; }
+            // Seed Data
+            var cryptoHelper = new CryptoHelper();
+            var password = cryptoHelper.Encrypt("Test+-1234*", cryptoHelper.GetKey(), cryptoHelper.GetIV());
+            var user = new User
+            {
+                Id = new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"),
+                Name = "Can",
+                LastName = "Çalışkan",
+                Address = "Karşıyaka",
+                CreatedDate = DateTime.Now,
+                Email = "cancaliskan@windowslive.com",
+                Password = password,
+                IsActive = true
+            };
+            modelBuilder.Entity<User>().HasData(user);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
