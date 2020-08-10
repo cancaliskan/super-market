@@ -34,6 +34,7 @@ namespace Supermarket.DataAccess.Migrations
                     Name = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
                     Phone = table.Column<string>(nullable: true)
                 },
@@ -109,6 +110,11 @@ namespace Supermarket.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Address", "CreatedDate", "DeletedDate", "Email", "IsActive", "LastName", "Name", "Password", "Phone", "UpdateDate" },
+                values: new object[] { new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"), "Karşıyaka", new DateTime(2020, 8, 10, 23, 42, 58, 510, DateTimeKind.Local).AddTicks(4039), null, "cancaliskan@windowslive.com", true, "Çalışkan", "Can", "1cYq+ZX3M3wUfRiHgCEhdw==", null, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Baskets_UserId",

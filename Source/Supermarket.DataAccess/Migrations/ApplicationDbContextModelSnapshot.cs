@@ -141,6 +141,9 @@ namespace Supermarket.DataAccess.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
@@ -150,6 +153,19 @@ namespace Supermarket.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"),
+                            Address = "Karşıyaka",
+                            CreatedDate = new DateTime(2020, 8, 10, 23, 42, 58, 510, DateTimeKind.Local).AddTicks(4039),
+                            Email = "cancaliskan@windowslive.com",
+                            IsActive = true,
+                            LastName = "Çalışkan",
+                            Name = "Can",
+                            Password = "1cYq+ZX3M3wUfRiHgCEhdw=="
+                        });
                 });
 
             modelBuilder.Entity("Supermarket.Domain.Entities.Basket", b =>
