@@ -3,9 +3,19 @@
 
 <h3>Menu</h3>
 <ul class="nav side-menu">
-        <li>
-            <a href="../Home/Index"><i class="fa fa-edit"></i> Home Page</a>
-            <a href="../Product/List"><i class="fa fa-edit"></i> Product List</a>
-            <a href="../Basket/Index"><i class="fa fa-edit"></i> Basket</a>
-        </li>
+    <li>
+        <a href="../Home/Index"><i class="fa fa-edit"></i> Home Page</a>
+    </li>
+
+    <li>
+        <a><i class="fa fa-edit"></i> Product <span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+            <li><a href="../Product/Add">Add</a></li>
+            <li><a href="../Product/List">List</a></li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="../Basket/Index"><i class="fa fa-edit"></i> Basket</a>
+    </li>
 </ul>

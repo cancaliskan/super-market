@@ -60,8 +60,26 @@ namespace Supermarket.DataAccess.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
@@ -69,6 +87,19 @@ namespace Supermarket.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("eb6262bd-bac4-4fac-afcb-34c2774d22c2"),
+                            CreatedDate = new DateTime(2020, 8, 11, 17, 29, 56, 571, DateTimeKind.Local).AddTicks(4716),
+                            Description = "Test Product",
+                            IsActive = true,
+                            Name = "Product Name",
+                            Stock = 5,
+                            Type = "Phone",
+                            UnitPrice = 99m
+                        });
                 });
 
             modelBuilder.Entity("Supermarket.Domain.Entities.ProductBasket", b =>
@@ -174,12 +205,12 @@ namespace Supermarket.DataAccess.Migrations
                         {
                             Id = new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"),
                             Address = "Karşıyaka",
-                            CreatedDate = new DateTime(2020, 8, 11, 13, 1, 50, 720, DateTimeKind.Local).AddTicks(8496),
+                            CreatedDate = new DateTime(2020, 8, 11, 17, 29, 56, 566, DateTimeKind.Local).AddTicks(6319),
                             Email = "cancaliskan@windowslive.com",
                             IsActive = true,
                             LastName = "Çalışkan",
                             Name = "Can",
-                            Password = "MWlM+4K+pIAXuaGb7UcCQFpqckwSt/wll9W1Ytu0wwY="
+                            Password = "Emp3rwJx/hSbMFRmqPC9HD8rGa7Q2de5K5ITsxonQCA="
                         });
                 });
 

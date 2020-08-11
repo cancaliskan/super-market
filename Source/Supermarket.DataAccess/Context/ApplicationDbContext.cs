@@ -52,6 +52,17 @@ namespace Supermarket.DataAccess.Context
                 IsActive = true
             };
             modelBuilder.Entity<User>().HasData(user);
+            modelBuilder.Entity<Product>().HasData(new Product()
+            {
+                Id = new Guid("eb6262bd-bac4-4fac-afcb-34c2774d22c2"),
+                IsActive = true,
+                CreatedDate = DateTime.Now,
+                Description = "Test Product",
+                Name = "Product Name",
+                Type = "Phone",
+                Stock = 5,
+                UnitPrice = 99
+            });
 
             base.OnModelCreating(modelBuilder);
         }

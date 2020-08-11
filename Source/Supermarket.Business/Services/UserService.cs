@@ -14,9 +14,6 @@ namespace Supermarket.Business.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly ResponseHelper<User> _responseHelper;
 
-        private readonly byte[] _key;
-        private readonly byte[] _iv;
-
         public UserService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;

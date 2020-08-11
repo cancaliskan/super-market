@@ -33,6 +33,7 @@ namespace Supermarket.Web
 
             #region Services
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IProductService, ProductService>();
             #endregion
 
             #region UnitOfWork
@@ -45,12 +46,17 @@ namespace Supermarket.Web
 
             #endregion
 
+            #region Authentication
+
             services.AddAuthentication("CookieAuthentication")
                 .AddCookie("CookieAuthentication", config =>
                 {
                     config.Cookie.Name = "UserLoginCookie";
                     config.LoginPath = "/User/Login";
                 });
+
+            #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -29,12 +29,13 @@ namespace Supermarket.DataAccess.Repositories
             return _dbSet.ToList().Where(x=>x.IsActive);
         }
 
-        public void Add(T entity)
+        public T Add(T entity)
         {
             entity.Id = new Guid(GuidHelper.GetNewUid());
             entity.IsActive = true;
             entity.CreatedDate=DateTime.Now;
             _dbSet.Add(entity);
+            return entity;
         }
 
         public void Update(T entity)

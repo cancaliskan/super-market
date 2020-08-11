@@ -49,5 +49,11 @@ namespace Supermarket.Common.Helpers
         {
             return guid.ToString("N");
         }
+
+        public static Guid ToGuid(this string guid)
+        {
+            return new Guid(guid);
+        }
+
     }
 }

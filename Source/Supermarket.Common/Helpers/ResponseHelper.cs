@@ -27,5 +27,16 @@ namespace Supermarket.Common.Helpers
 
             return response;
         }
+
+        public Response<T> SuccessResponse(string successMessage)
+        {
+            var response = new Response<T>
+            {
+                IsSucceed = true,
+                SuccessMessage = successMessage,
+            };
+
+            return response;
+        }
     }
 }
