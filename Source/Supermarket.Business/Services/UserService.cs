@@ -11,26 +11,65 @@ namespace Supermarket.Business.Services
 {
     public class UserService : IUserService
     {
-        private readonly ResponseHelper<User> _responseHelper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ResponseHelper<User> _responseHelper;
 
-        private readonly CryptoHelper _cryptoHelper;
         private readonly byte[] _key;
         private readonly byte[] _iv;
 
-        public UserService(ResponseHelper<User> responseHelper, IUnitOfWork unitOfWork, CryptoHelper cryptoHelper)
+        public UserService(IUnitOfWork unitOfWork)
         {
-            _responseHelper = responseHelper;
             _unitOfWork = unitOfWork;
 
-            _cryptoHelper = cryptoHelper;
-            _key = _cryptoHelper.GetKey();
-            _iv = _cryptoHelper.GetIV();
+            _responseHelper = new ResponseHelper<User>();
         }
 
-        public Response<User> GetById(int id)
+        public Response<User> GetById(Guid id)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                if (id.IsEmptyGuid())
+                {
+                    return _responseHelper.FailResponse("Invalid user id");
+                }
+
+                var user = _unitOfWork.UserRepository.GetById(id);
+                if (user == null)
+                {
+                    return _responseHelper.FailResponse("User could not found");
+                }
+
+                return _responseHelper.SuccessResponse(user, "Returned user successfully");
+
+            }
+            catch (Exception e)
+            {
+                return _responseHelper.FailResponse(e.ToString());
+            }
+        }
+
+        public Response<User> GetByEmail(string email)
+        {
+            try
+            {
+                if (email.IsNotEmail())
+                {
+                    return _responseHelper.FailResponse("Invalid email address");
+                }
+
+                var user = _unitOfWork.UserRepository.GetByEmail(email);
+                if (user == null)
+                {
+                    return _responseHelper.FailResponse("User could not found");
+                }
+
+                return _responseHelper.SuccessResponse(user, "Returned user successfully");
+
+            }
+            catch (Exception e)
+            {
+                return _responseHelper.FailResponse(e.ToString());
+            }
         }
 
         public Response<IEnumerable<User>> GetAll()
@@ -44,10 +83,7 @@ namespace Supermarket.Business.Services
             {
                 if (ModelValidation(entity, out var response)) return response;
 
-                entity.Id = new Guid(GuidHelper.GetNewUid());
-                entity.Password = _cryptoHelper.Encrypt(entity.Password, _key, _iv);
-                entity.CreatedDate = DateTime.Now;
-                entity.IsActive = true;
+                entity.Password = CryptoHelper.Encrypt(entity.Password);
 
                 _unitOfWork.UserRepository.Add(entity);
                 _unitOfWork.Complete();
@@ -65,7 +101,7 @@ namespace Supermarket.Business.Services
             throw new System.NotImplementedException();
         }
 
-        public Response<bool> Remove(int id)
+        public Response<bool> Remove(Guid id)
         {
             throw new System.NotImplementedException();
         }

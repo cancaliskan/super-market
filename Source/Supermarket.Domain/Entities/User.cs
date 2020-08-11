@@ -10,7 +10,6 @@ namespace Supermarket.Domain.Entities
             SalesInformation = new List<SalesInformation>();
         }
 
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }

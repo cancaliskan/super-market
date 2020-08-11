@@ -92,7 +92,12 @@ namespace Supermarket.DataAccess.Migrations
                 columns: table => new
                 {
                     ProductId = table.Column<Guid>(nullable: false),
-                    BasketId = table.Column<Guid>(nullable: false)
+                    BasketId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: true),
+                    UpdateDate = table.Column<DateTime>(nullable: true),
+                    DeletedDate = table.Column<DateTime>(nullable: true),
+                    IsActive = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -114,7 +119,7 @@ namespace Supermarket.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Address", "CreatedDate", "DeletedDate", "Email", "IsActive", "LastName", "Name", "Password", "Phone", "UpdateDate" },
-                values: new object[] { new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"), "Karşıyaka", new DateTime(2020, 8, 10, 23, 42, 58, 510, DateTimeKind.Local).AddTicks(4039), null, "cancaliskan@windowslive.com", true, "Çalışkan", "Can", "1cYq+ZX3M3wUfRiHgCEhdw==", null, null });
+                values: new object[] { new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"), "Karşıyaka", new DateTime(2020, 8, 11, 13, 1, 50, 720, DateTimeKind.Local).AddTicks(8496), null, "cancaliskan@windowslive.com", true, "Çalışkan", "Can", "MWlM+4K+pIAXuaGb7UcCQFpqckwSt/wll9W1Ytu0wwY=", null, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Baskets_UserId",

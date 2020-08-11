@@ -1,0 +1,20 @@
+﻿@model UserViewModel 
+@{ 
+    ViewBag.Title = "Login"; 
+}  
+<h2>Login</h2>  
+
+<form method = "post" asp-controller = "User" asp-action = "Login"> 
+    <div> 
+        <label asp-for = "Email"></label> 
+        <input asp-for = "Email" /> 
+    </div> 
+      
+    <div> 
+        <label asp-for = "Password"></label> 
+        <input asp-for = "Password" />
+        <span asp-validation-for = "Password"></span> 
+    </div> 
+    
+    <input type = "submit" value = "Login" /> 
+</form> 

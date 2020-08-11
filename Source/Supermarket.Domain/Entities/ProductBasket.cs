@@ -2,7 +2,7 @@
 
 namespace Supermarket.Domain.Entities
 {
-    public sealed class ProductBasket
+    public sealed class ProductBasket : BaseEntity
     {
         public Guid ProductId { get; set; }
         public Product Product { get; set; }

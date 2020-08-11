@@ -79,6 +79,21 @@ namespace Supermarket.DataAccess.Migrations
                     b.Property<Guid>("BasketId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("ProductId", "BasketId");
 
                     b.HasIndex("BasketId");
@@ -159,12 +174,12 @@ namespace Supermarket.DataAccess.Migrations
                         {
                             Id = new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"),
                             Address = "Karşıyaka",
-                            CreatedDate = new DateTime(2020, 8, 10, 23, 42, 58, 510, DateTimeKind.Local).AddTicks(4039),
+                            CreatedDate = new DateTime(2020, 8, 11, 13, 1, 50, 720, DateTimeKind.Local).AddTicks(8496),
                             Email = "cancaliskan@windowslive.com",
                             IsActive = true,
                             LastName = "Çalışkan",
                             Name = "Can",
-                            Password = "1cYq+ZX3M3wUfRiHgCEhdw=="
+                            Password = "MWlM+4K+pIAXuaGb7UcCQFpqckwSt/wll9W1Ytu0wwY="
                         });
                 });
 

@@ -1,5 +1,6 @@
 ﻿using Supermarket.DataAccess.Context;
 using Supermarket.DataAccess.Contracts;
+using Supermarket.DataAccess.Repositories;
 
 namespace Supermarket.DataAccess.UnitOfWork
 {
@@ -7,14 +8,14 @@ namespace Supermarket.DataAccess.UnitOfWork
     {
         private readonly ApplicationDbContext _applicationDbContext;
 
-        public UnitOfWork(ApplicationDbContext applicationDbContext, IBasketRepository basketRepository, IProductBasketRepository productBasketRepository, IProductRepository productRepository, ISalesInformationRepository salesInformationRepository, IUserRepository userRepository)
+        public UnitOfWork(ApplicationDbContext applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
-            BasketRepository = basketRepository;
-            ProductBasketRepository = productBasketRepository;
-            ProductRepository = productRepository;
-            SalesInformationRepository = salesInformationRepository;
-            UserRepository = userRepository;
+            BasketRepository = new BasketRepository(_applicationDbContext);
+            ProductBasketRepository = new ProductBasketRepository(_applicationDbContext);
+            ProductRepository = new ProductRepository(_applicationDbContext);
+            SalesInformationRepository = new SalesInformationRepository(_applicationDbContext);
+            UserRepository = new UserRepository(_applicationDbContext);
         }
 
         public IBasketRepository BasketRepository { get; }
