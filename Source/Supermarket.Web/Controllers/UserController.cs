@@ -40,6 +40,18 @@ namespace Supermarket.Web.Controllers
             {
                 if (model.Password == CryptoHelper.Decrypt(response.Result.Password))
                 {
+                    var userClaims = new List<Claim>() {
+                        new Claim(ClaimTypes.Name, response.Result.Name),
+                        new Claim(ClaimTypes.Email, response.Result.Email)
+                    };
+
+                    var grandmaIdentity = new ClaimsIdentity(userClaims, "User Identity");
+
+                    var userPrincipal = new ClaimsPrincipal(new[] { grandmaIdentity });
+                    await HttpContext.SignInAsync(userPrincipal);
+
+
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -48,13 +60,14 @@ namespace Supermarket.Web.Controllers
                 }
             }
 
-            return RedirectToAction("Index", "Home");
+            return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            return RedirectToAction("Index", "Home");
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Login");
         }
     }
 }
