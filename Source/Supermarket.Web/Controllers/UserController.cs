@@ -35,35 +35,26 @@ namespace Supermarket.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(UserViewModel model)
         {
-            var response = _userService.GetByEmail(model.Email);
+            var response = _userService.Login(model.Email, model.Password);
             if (response.IsSucceed)
             {
-                if (model.Password == CryptoHelper.Decrypt(response.Result.Password))
-                {
-                    var userClaims = new List<Claim>() {
+                var userClaims = new List<Claim>() {
                         new Claim(ClaimTypes.Name, response.Result.Name),
                         new Claim(ClaimTypes.Email, response.Result.Email)
                     };
 
-                    var grandmaIdentity = new ClaimsIdentity(userClaims, "User Identity");
+                var grandmaIdentity = new ClaimsIdentity(userClaims, "User Identity");
 
-                    var userPrincipal = new ClaimsPrincipal(new[] { grandmaIdentity });
-                    await HttpContext.SignInAsync(userPrincipal);
+                var userPrincipal = new ClaimsPrincipal(new[] { grandmaIdentity });
+                await HttpContext.SignInAsync(userPrincipal);
 
-
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Incorrect password");
-                    return View(model);
-                }
+                return RedirectToAction("Index", "Home");
             }
 
-            return View();
+            ViewBag.Warning = response.ErrorMessage;
+            return View(model);
         }
 
-        [HttpPost]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();

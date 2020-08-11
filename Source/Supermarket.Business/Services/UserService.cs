@@ -48,7 +48,7 @@ namespace Supermarket.Business.Services
             }
         }
 
-        public Response<User> GetByEmail(string email)
+        public Response<User> Login(string email, string password)
         {
             try
             {
@@ -56,11 +56,20 @@ namespace Supermarket.Business.Services
                 {
                     return _responseHelper.FailResponse("Invalid email address");
                 }
+                else if (password.IsNotValidPassword())
+                {
+                    return _responseHelper.FailResponse("Invalid password");
+                }
 
                 var user = _unitOfWork.UserRepository.GetByEmail(email);
                 if (user == null)
                 {
                     return _responseHelper.FailResponse("User could not found");
+                }
+
+                if (password != CryptoHelper.Decrypt(user.Password))
+                {
+                    return _responseHelper.FailResponse("Invalid password");
                 }
 
                 return _responseHelper.SuccessResponse(user, "Returned user successfully");

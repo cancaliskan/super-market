@@ -1,20 +1,66 @@
-﻿@model UserViewModel 
-@{ 
-    ViewBag.Title = "Login"; 
-}  
-<h2>Login</h2>  
+﻿@model UserViewModel
 
-<form method = "post" asp-controller = "User" asp-action = "Login"> 
-    <div> 
-        <label asp-for = "Email"></label> 
-        <input asp-for = "Email" /> 
-    </div> 
-      
-    <div> 
-        <label asp-for = "Password"></label> 
-        <input asp-for = "Password" />
-        <span asp-validation-for = "Password"></span> 
-    </div> 
-    
-    <input type = "submit" value = "Login" /> 
-</form> 
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login </title>
+
+    <link href="~/assert/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/assert/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+    <link href="~/assert/vendors/nprogress/nprogress.css" rel="stylesheet" />
+
+    <link href="~/assert/build/css/custom.min.css" rel="stylesheet" />
+
+    <link href="~/assert/vendors/animate.css/animate.min.css" rel="stylesheet" />
+</head>
+@using (Html.BeginForm("Login", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <body class="login">
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                <section class="login_content">
+                    @if (ViewBag.Warning != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewBag.Warning
+                        </div>
+                    }
+                    <form>
+                        <h1>Login</h1>
+                        <div>
+                            @Html.TextBoxFor(x => x.Email, new { placeholder = "E-Mail", @class = "form-control" })
+                        </div>
+                        <br />
+                        <div>
+                            @Html.PasswordFor(x => x.Password, new { placeholder = "Password", @class = "form-control" })
+                        </div>
+                        <br />
+                        <div>
+                            <input type="submit" id="submitbtn" value="Login" class="btn btn-default submit" />
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="separator">
+                            <div class="clearfix"></div>
+                            <br />
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </body>
+}
+</html>
