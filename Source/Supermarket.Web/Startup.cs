@@ -35,6 +35,7 @@ namespace Supermarket.Web
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IProductBasketService, ProductBasketService>();
+            services.AddTransient<IBasketService, BasketService>();
             #endregion
 
             #region UnitOfWork

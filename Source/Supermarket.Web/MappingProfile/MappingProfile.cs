@@ -11,6 +11,12 @@ namespace Supermarket.Web.MappingProfile
         {
             CreateMap<Product, ProductViewModel>();
             CreateMap<ProductViewModel, Product>();
+
+            CreateMap<ProductDetail, Product>();
+            CreateMap<Product, ProductDetail>();
+
+            CreateMap<BasketViewModel, Basket>();
+            CreateMap<Basket, BasketViewModel>();
         }
     }
 }

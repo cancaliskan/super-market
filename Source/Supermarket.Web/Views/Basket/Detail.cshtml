@@ -1,21 +1,18 @@
-﻿@model IEnumerable<Supermarket.Web.Models.ProductViewModel>
-
+﻿@model Supermarket.Web.Models.BasketViewModel
 @{
-    ViewData["Title"] = "List";
+    ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_TableLayout.cshtml";
 }
 
-<div>
-    <a href="../Product/Add"><input type="button" value="Add New Product" class="btn btn-success" /></a>
-</div>
-
+<h2>Basket Detail</h2>
+<hr />
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-warning" role="alert">
+        @ViewBag.Message
+    </div>
+}
 <div class="tableStyle">
-    @if (ViewBag.Message != null)
-    {
-        <div class="alert alert-success" role="alert">
-            @ViewBag.Message
-        </div>
-    }
     <div class="row">
         <div class="col-xs-12">
             <div class="table-responsive">
@@ -23,22 +20,23 @@
                     <thead>
                         <tr>
                             <th>Product Name</th>
-                            <th>Type</th>
                             <th>Unit Price</th>
+                            <th>Count</th>
+                            <th>Total</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var record in Model)
+                        @foreach (var record in Model.Products)
                         {
                             <tr>
                                 <td>@record.Name</td>
-                                <td>@record.Type</td>
                                 <td>@record.UnitPrice</td>
+                                <td>@record.Count</td>
+                                <td>@record.Total</td>
 
                                 <td style="text-align: center; width: 20%">
-                                    @Html.ActionLink("Edit", "Edit", new { id = record.Id }, new { @class = "btn btn-round btn-dark" })
-                                    @Html.ActionLink("Detail", "Detail", new { id = record.Id }, new { @class = "btn btn-round btn-default" })
+                                    @Html.ActionLink("Detail", "Detail", "Product", new { id = record.Id }, new { @class = "btn btn-round btn-default" })
                                     <a data-id=@record.Id class="open-AddBookDialog btn btn-round btn-danger" href="#addBookDialog">Delete</a>
                                 </td>
                             </tr>
@@ -50,6 +48,29 @@
     </div>
 </div>
 
+<br />
+<hr />
+<br />
+
+@if (Model.ProductCount > 0)
+{
+    <table style="width: 50%">
+        <thead>
+            <tr>
+                <th>Total Product Count</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.ProductCount</td>
+                <td>@Model.TotalPrice</td>
+            </tr>
+        </tbody>
+    </table>
+}
+
+
 <div class="modal fade" id="addBookDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -57,7 +78,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Confirm to delete</h4>
             </div>
-            @using (Html.BeginForm("Delete", "Product", FormMethod.Post))
+            @using (Html.BeginForm("Remove", "Basket", FormMethod.Post))
             {
                 <input type="hidden" name="productId" id="productId" value="" />
                 <div class="modal-footer">

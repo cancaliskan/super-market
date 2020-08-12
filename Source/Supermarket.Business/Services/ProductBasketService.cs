@@ -61,15 +61,5 @@ namespace Supermarket.Business.Services
                 return _booleanResponseHelper.FailResponse(e.ToString());
             }
         }
-
-        public Response<bool> RemoveFromBasket(User user, Guid productId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Response<List<Product>> GetBasketDetails(User user)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -80,7 +80,6 @@
 <div>
     @using (Html.BeginForm("AddToBasket", "Product", new { id = Model.Id }, FormMethod.Post))
     {
-        @Html.ActionLink("Back to List", "List", "Product", new { @class = "btn btn-round btn-primary" })
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-round btn-dark" })
         <input type="hidden" name="productId" id="productId" value="" />
         <button type="submit" class="btn btn-round btn-warning">Add to Basket</button>
