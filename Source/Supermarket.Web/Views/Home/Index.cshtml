@@ -1,8 +1,45 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<Supermarket.Web.Models.ProductViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_TableLayout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h2>Recently Added Products</h2>
+
+<div>
+    <a href="../Product/List"><input type="button" value="Show All Products" class="btn btn-success" /></a>
 </div>
+
+<div class="tableStyle">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="display" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Type</th>
+                            <th>Unit Price</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var record in Model)
+                        {
+                            <tr>
+                                <td>@record.Name</td>
+                                <td>@record.Type</td>
+                                <td>@record.UnitPrice</td>
+
+                                <td style="text-align: center; width: 20%">
+                                    @Html.ActionLink("Detail", "Detail", "Product", new { id = record.Id }, new { @class = "btn btn-round btn-default" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

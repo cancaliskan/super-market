@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Supermarket.Business.Contracts;
 using Supermarket.Common.Contracts;
 using Supermarket.Common.Helpers;
@@ -110,6 +109,29 @@ namespace Supermarket.Business.Services
         public Response<bool> Remove(Guid id)
         {
             throw new System.NotImplementedException();
+        }
+
+        public Response<User> GetUserByEmail(string eMail)
+        {
+            try
+            {
+                if (eMail.IsNotEmail())
+                {
+                    return _responseHelper.FailResponse("Invalid email address");
+                }
+
+                var user = _unitOfWork.UserRepository.GetByEmail(eMail);
+                if (user == null)
+                {
+                    return _responseHelper.FailResponse("User could not found");
+                }
+
+                return _responseHelper.SuccessResponse(user, "Returned user successfully");
+            }
+            catch (Exception e)
+            {
+                return _responseHelper.FailResponse(e.ToString());
+            }
         }
 
         private bool ModelValidation(User entity, out Response<User> response)

@@ -65,7 +65,7 @@
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <div class="bottom-button">
-                        <a href="../List"><input type="button" value="Back to List" class="btn btn-primary" /></a>
+                        @Html.ActionLink("Back to List", "List", "Product", new { @class = "btn btn-round btn-primary" })
                         <input type="submit" value="Save" class="btn btn-success"/>
                     </div>
                 </div>

@@ -8,6 +8,12 @@
 <div>
     <h4>Product Detail</h4>
     <hr />
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-warning" role="alert">
+            @ViewBag.Message
+        </div>
+    }
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -72,6 +78,11 @@
     </dl>
 </div>
 <div>
-    <a href="../List"><input type="button" value="Back to List" class="btn btn-primary" /></a>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-round btn-dark" })
+    @using (Html.BeginForm("AddToBasket", "Product", new { id = Model.Id }, FormMethod.Post))
+    {
+        @Html.ActionLink("Back to List", "List", "Product", new { @class = "btn btn-round btn-primary" })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-round btn-dark" })
+        <input type="hidden" name="productId" id="productId" value="" />
+        <button type="submit" class="btn btn-round btn-warning">Add to Basket</button>
+    }
 </div>

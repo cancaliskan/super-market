@@ -61,6 +61,19 @@ namespace Supermarket.Business.Services
             }
         }
 
+        public Response<List<Product>> GetRecentlyAddedProducts()
+        {
+            try
+            {
+                var products = _unitOfWork.ProductRepository.GetRecentlyAddedProducts();
+                return _listResponseHelper.SuccessResponse(products.ToList(), "Products returned successfully");
+            }
+            catch (Exception e)
+            {
+                return _listResponseHelper.FailResponse(e.ToString());
+            }
+        }
+
         public Response<Product> Add(Product entity)
         {
             try

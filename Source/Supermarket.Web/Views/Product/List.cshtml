@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_TableLayout.cshtml";
 }
 
-<div style="margin-top: 7%; margin-bottom: 2%">
+<div>
     <a href="../Product/Add"><input type="button" value="Add New Product" class="btn btn-success" /></a>
 </div>
 
@@ -23,6 +23,8 @@
                     <thead>
                         <tr>
                             <th>Product Name</th>
+                            <th>Type</th>
+                            <th>Unit Price</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -31,6 +33,8 @@
                         {
                             <tr>
                                 <td>@record.Name</td>
+                                <td>@record.Type</td>
+                                <td>@record.UnitPrice</td>
 
                                 <td style="text-align: center; width: 20%">
                                     @Html.ActionLink("Edit", "Edit", new { id = record.Id }, new { @class = "btn btn-round btn-dark" })

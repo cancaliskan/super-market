@@ -31,7 +31,7 @@ namespace Supermarket.DataAccess.Repositories
 
         public T Add(T entity)
         {
-            entity.Id = new Guid(GuidHelper.GetNewUid());
+            entity.Id = Guid.NewGuid();
             entity.IsActive = true;
             entity.CreatedDate=DateTime.Now;
             _dbSet.Add(entity);

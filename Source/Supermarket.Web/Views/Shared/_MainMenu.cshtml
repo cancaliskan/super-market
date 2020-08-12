@@ -4,18 +4,22 @@
 <h3>Menu</h3>
 <ul class="nav side-menu">
     <li>
-        <a href="../Home/Index"><i class="fa fa-edit"></i> Home Page</a>
+        @Html.ActionLink("Home Page", "Index", "Home")
     </li>
 
     <li>
         <a><i class="fa fa-edit"></i> Product <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-            <li><a href="../Product/Add">Add</a></li>
-            <li><a href="../Product/List">List</a></li>
+            <li>
+                @Html.ActionLink("Add", "Add", "Product")
+            </li>
+            <li>
+                @Html.ActionLink("List", "List", "Product")
+            </li>
         </ul>
     </li>
 
     <li>
-        <a href="../Basket/Index"><i class="fa fa-edit"></i> Basket</a>
+        @Html.ActionLink("Basket Detail", "Detail", "Basket")
     </li>
 </ul>

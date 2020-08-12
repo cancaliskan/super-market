@@ -14,5 +14,6 @@ namespace Supermarket.Business.Contracts
         Response<User> Add(User entity);
         Response<User> Update(User entity);
         Response<bool> Remove(Guid id);
+        Response<User> GetUserByEmail(string eMail);
     }
 }

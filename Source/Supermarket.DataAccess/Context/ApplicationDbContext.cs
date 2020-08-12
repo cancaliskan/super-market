@@ -36,7 +36,7 @@ namespace Supermarket.DataAccess.Context
 
             // One Product has many Baskets
             // One Basket has many Products
-            modelBuilder.Entity<ProductBasket>().HasKey(x => new { x.ProductId, x.BasketId });
+            //modelBuilder.Entity<ProductBasket>().HasKey(x => new { x.ProductId, x.BasketId });
 
             // Seed Data
             var password = CryptoHelper.Encrypt("Test+-1234*");

@@ -10,6 +10,7 @@ namespace Supermarket.Business.Contracts
     {
         Response<Product> GetById(Guid id);
         Response<List<Product>> GetAll();
+        Response<List<Product>> GetRecentlyAddedProducts();
         Response<Product> Add(Product entity);
         Response<Product> Update(Product entity);
         Response<bool> Remove(Product entity);

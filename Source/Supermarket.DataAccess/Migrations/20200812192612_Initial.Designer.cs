@@ -10,7 +10,7 @@ using Supermarket.DataAccess.Context;
 namespace Supermarket.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200811142957_Initial")]
+    [Migration("20200812192612_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,7 +94,7 @@ namespace Supermarket.DataAccess.Migrations
                         new
                         {
                             Id = new Guid("eb6262bd-bac4-4fac-afcb-34c2774d22c2"),
-                            CreatedDate = new DateTime(2020, 8, 11, 17, 29, 56, 571, DateTimeKind.Local).AddTicks(4716),
+                            CreatedDate = new DateTime(2020, 8, 12, 22, 26, 11, 851, DateTimeKind.Local).AddTicks(3978),
                             Description = "Test Product",
                             IsActive = true,
                             Name = "Product Name",
@@ -106,7 +106,8 @@ namespace Supermarket.DataAccess.Migrations
 
             modelBuilder.Entity("Supermarket.Domain.Entities.ProductBasket", b =>
                 {
-                    b.Property<Guid>("ProductId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("BasketId")
@@ -118,18 +119,20 @@ namespace Supermarket.DataAccess.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("ProductId", "BasketId");
+                    b.HasKey("Id");
 
                     b.HasIndex("BasketId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("ProductBaskets");
                 });
@@ -207,12 +210,12 @@ namespace Supermarket.DataAccess.Migrations
                         {
                             Id = new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"),
                             Address = "Karşıyaka",
-                            CreatedDate = new DateTime(2020, 8, 11, 17, 29, 56, 566, DateTimeKind.Local).AddTicks(6319),
+                            CreatedDate = new DateTime(2020, 8, 12, 22, 26, 11, 846, DateTimeKind.Local).AddTicks(76),
                             Email = "cancaliskan@windowslive.com",
                             IsActive = true,
                             LastName = "Çalışkan",
                             Name = "Can",
-                            Password = "Emp3rwJx/hSbMFRmqPC9HD8rGa7Q2de5K5ITsxonQCA="
+                            Password = "QoCd24GLe87vYoAuIydtiaMwAtgGSljnbrHWmOliIIs="
                         });
                 });
 

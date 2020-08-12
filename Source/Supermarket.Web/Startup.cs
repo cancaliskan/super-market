@@ -34,6 +34,7 @@ namespace Supermarket.Web
             #region Services
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IProductBasketService, ProductBasketService>();
             #endregion
 
             #region UnitOfWork
@@ -56,7 +57,6 @@ namespace Supermarket.Web
                 });
 
             #endregion
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

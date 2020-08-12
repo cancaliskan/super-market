@@ -97,17 +97,17 @@ namespace Supermarket.DataAccess.Migrations
                 name: "ProductBaskets",
                 columns: table => new
                 {
-                    ProductId = table.Column<Guid>(nullable: false),
-                    BasketId = table.Column<Guid>(nullable: false),
                     Id = table.Column<Guid>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: true),
                     UpdateDate = table.Column<DateTime>(nullable: true),
                     DeletedDate = table.Column<DateTime>(nullable: true),
-                    IsActive = table.Column<bool>(nullable: false)
+                    IsActive = table.Column<bool>(nullable: false),
+                    ProductId = table.Column<Guid>(nullable: false),
+                    BasketId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductBaskets", x => new { x.ProductId, x.BasketId });
+                    table.PrimaryKey("PK_ProductBaskets", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ProductBaskets_Baskets_BasketId",
                         column: x => x.BasketId,
@@ -125,12 +125,12 @@ namespace Supermarket.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "CreatedDate", "DeletedDate", "Description", "Image", "IsActive", "Name", "Stock", "Type", "UnitPrice", "UpdateDate" },
-                values: new object[] { new Guid("eb6262bd-bac4-4fac-afcb-34c2774d22c2"), new DateTime(2020, 8, 11, 17, 29, 56, 571, DateTimeKind.Local).AddTicks(4716), null, "Test Product", null, true, "Product Name", 5, "Phone", 99m, null });
+                values: new object[] { new Guid("eb6262bd-bac4-4fac-afcb-34c2774d22c2"), new DateTime(2020, 8, 12, 22, 26, 11, 851, DateTimeKind.Local).AddTicks(3978), null, "Test Product", null, true, "Product Name", 5, "Phone", 99m, null });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Address", "CreatedDate", "DeletedDate", "Email", "IsActive", "LastName", "Name", "Password", "Phone", "UpdateDate" },
-                values: new object[] { new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"), "Karşıyaka", new DateTime(2020, 8, 11, 17, 29, 56, 566, DateTimeKind.Local).AddTicks(6319), null, "cancaliskan@windowslive.com", true, "Çalışkan", "Can", "Emp3rwJx/hSbMFRmqPC9HD8rGa7Q2de5K5ITsxonQCA=", null, null });
+                values: new object[] { new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"), "Karşıyaka", new DateTime(2020, 8, 12, 22, 26, 11, 846, DateTimeKind.Local).AddTicks(76), null, "cancaliskan@windowslive.com", true, "Çalışkan", "Can", "QoCd24GLe87vYoAuIydtiaMwAtgGSljnbrHWmOliIIs=", null, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Baskets_UserId",
@@ -142,6 +142,11 @@ namespace Supermarket.DataAccess.Migrations
                 name: "IX_ProductBaskets_BasketId",
                 table: "ProductBaskets",
                 column: "BasketId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductBaskets_ProductId",
+                table: "ProductBaskets",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SalesInformation_UserId",
