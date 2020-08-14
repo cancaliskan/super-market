@@ -8,27 +8,6 @@ namespace Supermarket.DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    CreatedDate = table.Column<DateTime>(nullable: true),
-                    UpdateDate = table.Column<DateTime>(nullable: true),
-                    DeletedDate = table.Column<DateTime>(nullable: true),
-                    IsActive = table.Column<bool>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Type = table.Column<string>(nullable: true),
-                    Stock = table.Column<int>(nullable: false),
-                    UnitPrice = table.Column<decimal>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    Image = table.Column<byte[]>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -80,7 +59,9 @@ namespace Supermarket.DataAccess.Migrations
                     UpdateDate = table.Column<DateTime>(nullable: true),
                     DeletedDate = table.Column<DateTime>(nullable: true),
                     IsActive = table.Column<bool>(nullable: false),
-                    UserId = table.Column<Guid>(nullable: false)
+                    UserId = table.Column<Guid>(nullable: false),
+                    TotalItem = table.Column<int>(nullable: false),
+                    TotalPrice = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -89,6 +70,66 @@ namespace Supermarket.DataAccess.Migrations
                         name: "FK_SalesInformation_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: true),
+                    UpdateDate = table.Column<DateTime>(nullable: true),
+                    DeletedDate = table.Column<DateTime>(nullable: true),
+                    IsActive = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Type = table.Column<string>(nullable: true),
+                    Stock = table.Column<int>(nullable: false),
+                    UnitPrice = table.Column<decimal>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    Image = table.Column<byte[]>(nullable: true),
+                    BasketId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_Baskets_BasketId",
+                        column: x => x.BasketId,
+                        principalTable: "Baskets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderProductInformation",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: true),
+                    UpdateDate = table.Column<DateTime>(nullable: true),
+                    DeletedDate = table.Column<DateTime>(nullable: true),
+                    IsActive = table.Column<bool>(nullable: false),
+                    ProductId = table.Column<Guid>(nullable: false),
+                    SalesInformationId = table.Column<Guid>(nullable: false),
+                    UnitPrice = table.Column<decimal>(nullable: false),
+                    TotalPrice = table.Column<decimal>(nullable: false),
+                    Count = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderProductInformation", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderProductInformation_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderProductInformation_SalesInformation_SalesInformationId",
+                        column: x => x.SalesInformationId,
+                        principalTable: "SalesInformation",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -124,19 +165,29 @@ namespace Supermarket.DataAccess.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "CreatedDate", "DeletedDate", "Description", "Image", "IsActive", "Name", "Stock", "Type", "UnitPrice", "UpdateDate" },
-                values: new object[] { new Guid("eb6262bd-bac4-4fac-afcb-34c2774d22c2"), new DateTime(2020, 8, 12, 22, 26, 11, 851, DateTimeKind.Local).AddTicks(3978), null, "Test Product", null, true, "Product Name", 5, "Phone", 99m, null });
+                columns: new[] { "Id", "BasketId", "CreatedDate", "DeletedDate", "Description", "Image", "IsActive", "Name", "Stock", "Type", "UnitPrice", "UpdateDate" },
+                values: new object[] { new Guid("eb6262bd-bac4-4fac-afcb-34c2774d22c2"), null, new DateTime(2020, 8, 14, 18, 18, 7, 717, DateTimeKind.Local).AddTicks(7863), null, "Test Product", null, true, "Product Name", 5, "Phone", 99m, null });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Address", "CreatedDate", "DeletedDate", "Email", "IsActive", "LastName", "Name", "Password", "Phone", "UpdateDate" },
-                values: new object[] { new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"), "Karşıyaka", new DateTime(2020, 8, 12, 22, 26, 11, 846, DateTimeKind.Local).AddTicks(76), null, "cancaliskan@windowslive.com", true, "Çalışkan", "Can", "QoCd24GLe87vYoAuIydtiaMwAtgGSljnbrHWmOliIIs=", null, null });
+                values: new object[] { new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"), "Karşıyaka", new DateTime(2020, 8, 14, 18, 18, 7, 715, DateTimeKind.Local).AddTicks(2053), null, "cancaliskan@windowslive.com", true, "Çalışkan", "Can", "6ocWCYBogELTwKcI3Yd3TBZgq40YHcvdwqlGO/GmeCE=", null, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Baskets_UserId",
                 table: "Baskets",
                 column: "UserId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderProductInformation_ProductId",
+                table: "OrderProductInformation",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderProductInformation_SalesInformationId",
+                table: "OrderProductInformation",
+                column: "SalesInformationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductBaskets_BasketId",
@@ -149,6 +200,11 @@ namespace Supermarket.DataAccess.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_BasketId",
+                table: "Products",
+                column: "BasketId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SalesInformation_UserId",
                 table: "SalesInformation",
                 column: "UserId");
@@ -157,16 +213,19 @@ namespace Supermarket.DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "OrderProductInformation");
+
+            migrationBuilder.DropTable(
                 name: "ProductBaskets");
 
             migrationBuilder.DropTable(
                 name: "SalesInformation");
 
             migrationBuilder.DropTable(
-                name: "Baskets");
+                name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Baskets");
 
             migrationBuilder.DropTable(
                 name: "Users");

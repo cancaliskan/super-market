@@ -54,20 +54,30 @@
 
 @if (Model.ProductCount > 0)
 {
-    <table style="width: 50%">
-        <thead>
-            <tr>
-                <th>Total Product Count</th>
-                <th>Total Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>@Model.ProductCount</td>
-                <td>@Model.TotalPrice</td>
-            </tr>
-        </tbody>
-    </table>
+    <div style="display: flex; justify-content: center;">
+        <table style="width: 50%; font-size: large;">
+            <thead>
+                <tr>
+                    <th>Total Product Count</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.ProductCount</td>
+                    <td>@Model.TotalPrice</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr />
+    @using (Html.BeginForm("CompleteOrder", "Basket", new { id = Model.Id }, FormMethod.Post))
+    {
+        <input type="hidden" name="productId" id="BasketViewModel" value="" />
+        <div style="display: flex; justify-content: center; ">
+            <button type="submit" class="btn btn-success btn-lg">Complete Order</button>
+        </div>
+    }
 }
 
 

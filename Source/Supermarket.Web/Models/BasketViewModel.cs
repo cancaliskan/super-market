@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Supermarket.Web.Models
 {
-    public sealed class BasketViewModel
+    public sealed class BasketViewModel : BaseViewModel
     {
         public List<ProductDetail> Products { get; set; }
         public decimal TotalPrice { get; set; }

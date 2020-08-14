@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Supermarket.Web.Models.SalesInformationViewModel>
+@{
+    ViewData["Title"] = "Orders";
+    Layout = "~/Views/Shared/_TableLayout.cshtml";
+}
+
+<h2>Orders</h2>
+<hr />
+<div class="tableStyle">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="display" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Order Date</th>
+                            <th>Total Item</th>
+                            <th>Total Price</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var record in Model)
+                        {
+                            <tr>
+                                <td>@record.CreatedDate</td>
+                                <td>@record.TotalItem</td>
+                                <td>@record.TotalPrice</td>
+
+                                <td style="text-align: center; width: 20%">
+                                    @Html.ActionLink("Detail", "Detail", "SalesInformation", new { id = record.Id }, new { @class = "btn btn-round btn-default" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -15,6 +15,7 @@ namespace Supermarket.DataAccess.UnitOfWork
             ProductBasketRepository = new ProductBasketRepository(_applicationDbContext);
             ProductRepository = new ProductRepository(_applicationDbContext);
             SalesInformationRepository = new SalesInformationRepository(_applicationDbContext);
+            OrderProductInformationRepository = new OrderProductInformationRepository(_applicationDbContext);
             UserRepository = new UserRepository(_applicationDbContext);
         }
 
@@ -22,6 +23,7 @@ namespace Supermarket.DataAccess.UnitOfWork
         public IProductBasketRepository ProductBasketRepository { get; }
         public IProductRepository ProductRepository { get; }
         public ISalesInformationRepository SalesInformationRepository { get; }
+        public IOrderProductInformationRepository OrderProductInformationRepository { get; }
         public IUserRepository UserRepository { get; }
 
         public int Complete()

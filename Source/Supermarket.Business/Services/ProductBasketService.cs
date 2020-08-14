@@ -12,16 +12,12 @@ namespace Supermarket.Business.Services
     public class ProductBasketService : IProductBasketService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ResponseHelper<Product> _responseHelper;
-        private readonly ResponseHelper<List<Product>> _listResponseHelper;
         private readonly ResponseHelper<bool> _booleanResponseHelper;
 
         public ProductBasketService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
 
-            _responseHelper = new ResponseHelper<Product>();
-            _listResponseHelper = new ResponseHelper<List<Product>>();
             _booleanResponseHelper = new ResponseHelper<bool>();
         }
 

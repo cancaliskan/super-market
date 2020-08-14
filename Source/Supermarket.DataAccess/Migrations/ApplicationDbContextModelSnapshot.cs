@@ -48,10 +48,55 @@ namespace Supermarket.DataAccess.Migrations
                     b.ToTable("Baskets");
                 });
 
+            modelBuilder.Entity("Supermarket.Domain.Entities.OrderProductInformation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SalesInformationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("SalesInformationId");
+
+                    b.ToTable("OrderProductInformation");
+                });
+
             modelBuilder.Entity("Supermarket.Domain.Entities.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BasketId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("CreatedDate")
@@ -86,13 +131,15 @@ namespace Supermarket.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BasketId");
+
                     b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("eb6262bd-bac4-4fac-afcb-34c2774d22c2"),
-                            CreatedDate = new DateTime(2020, 8, 12, 22, 26, 11, 851, DateTimeKind.Local).AddTicks(3978),
+                            CreatedDate = new DateTime(2020, 8, 14, 18, 18, 7, 717, DateTimeKind.Local).AddTicks(7863),
                             Description = "Test Product",
                             IsActive = true,
                             Name = "Product Name",
@@ -149,6 +196,12 @@ namespace Supermarket.DataAccess.Migrations
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<int>("TotalItem")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
@@ -208,12 +261,12 @@ namespace Supermarket.DataAccess.Migrations
                         {
                             Id = new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"),
                             Address = "Karşıyaka",
-                            CreatedDate = new DateTime(2020, 8, 12, 22, 26, 11, 846, DateTimeKind.Local).AddTicks(76),
+                            CreatedDate = new DateTime(2020, 8, 14, 18, 18, 7, 715, DateTimeKind.Local).AddTicks(2053),
                             Email = "cancaliskan@windowslive.com",
                             IsActive = true,
                             LastName = "Çalışkan",
                             Name = "Can",
-                            Password = "QoCd24GLe87vYoAuIydtiaMwAtgGSljnbrHWmOliIIs="
+                            Password = "6ocWCYBogELTwKcI3Yd3TBZgq40YHcvdwqlGO/GmeCE="
                         });
                 });
 
@@ -226,6 +279,28 @@ namespace Supermarket.DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Supermarket.Domain.Entities.OrderProductInformation", b =>
+                {
+                    b.HasOne("Supermarket.Domain.Entities.Product", "Product")
+                        .WithMany("Orders")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Supermarket.Domain.Entities.SalesInformation", "SalesInformation")
+                        .WithMany("Orders")
+                        .HasForeignKey("SalesInformationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Supermarket.Domain.Entities.Product", b =>
+                {
+                    b.HasOne("Supermarket.Domain.Entities.Basket", null)
+                        .WithMany("Products")
+                        .HasForeignKey("BasketId");
+                });
+
             modelBuilder.Entity("Supermarket.Domain.Entities.ProductBasket", b =>
                 {
                     b.HasOne("Supermarket.Domain.Entities.Basket", "Basket")
@@ -235,7 +310,7 @@ namespace Supermarket.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("Supermarket.Domain.Entities.Product", "Product")
-                        .WithMany("ProductBaskets")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

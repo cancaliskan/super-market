@@ -9,6 +9,7 @@ namespace Supermarket.DataAccess.UnitOfWork
         IProductBasketRepository ProductBasketRepository { get; }
         IProductRepository ProductRepository { get; }
         ISalesInformationRepository SalesInformationRepository { get; }
+        IOrderProductInformationRepository OrderProductInformationRepository{ get; }
         IUserRepository UserRepository { get; }
 
         int Complete();

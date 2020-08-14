@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Supermarket.Domain.Entities
 {
@@ -11,6 +13,6 @@ namespace Supermarket.Domain.Entities
         public string Description { get; set; }
         public byte[] Image { get; set; }
 
-        public IList<ProductBasket> ProductBaskets { get; set; }
+        public IList<OrderProductInformation> Orders { get; set; }
     }
 }

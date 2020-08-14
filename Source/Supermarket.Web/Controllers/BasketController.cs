@@ -36,7 +36,8 @@ namespace Supermarket.Web.Controllers
                 {
                     var model = new BasketViewModel
                     {
-                        Products = _mapper.Map<List<ProductDetail>>(response.Result)
+                        Products = _mapper.Map<List<ProductDetail>>(response.Result.Products),
+                        Id = response.Result.Id
                     };
                     model.ProductCount = model.Products.Count;
                     model.TotalPrice = model.Products.Sum(x => x.UnitPrice);
@@ -84,6 +85,18 @@ namespace Supermarket.Web.Controllers
             }
 
             return RedirectToAction("Detail", new { message = currentUserResponse.ErrorMessage });
+        }
+
+        [HttpPost]
+        public IActionResult CompleteOrder(string id)
+        {
+            var response = _basketService.CompleteOrder(id.ToGuid());
+            if (response.IsSucceed)
+            {
+                return RedirectToAction("List", "Product", new { message = response.SuccessMessage });
+            }
+
+            return RedirectToAction("Detail", new { message = response.ErrorMessage });
         }
     }
 }

@@ -34,5 +34,27 @@ namespace Supermarket.DataAccess.Repositories
 
             return basket;
         }
+
+        public bool CompleteOrder(Guid id)
+        {
+            var basket = ApplicationContext.Baskets.Find(id);
+            if (basket == null)
+            {
+                return false;
+            }
+
+            basket.Products = null;
+            ApplicationContext.Baskets.Update(basket);
+
+            var products = ApplicationContext.ProductBaskets.Where(x => x.BasketId == id).ToList();
+            ApplicationContext.ProductBaskets.RemoveRange(products);
+
+            return true;
+        }
+
+        public new Basket GetById(Guid id)
+        {
+            return ApplicationContext.Baskets.Include("User").Include("Products").FirstOrDefault(x => x.Id == id && x.IsActive);
+        }
     }
 }

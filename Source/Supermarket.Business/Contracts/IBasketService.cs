@@ -7,7 +7,8 @@ namespace Supermarket.Business.Contracts
 {
     public interface IBasketService
     {
-        Response<List<Product>> GetDetail(User user);
+        Response<Basket> GetDetail(User user);
         Response<bool> Remove(User user, Guid productId);
+        Response<bool> CompleteOrder(Guid basketId);
     }
 }
