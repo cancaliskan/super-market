@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Moq;
 using NUnit.Framework;
-
 using Supermarket.Business.Services;
 using Supermarket.Business.Tests.Helpers;
 using Supermarket.Common.Contracts;
 using Supermarket.DataAccess.UnitOfWork;
 using Supermarket.Domain.Entities;
 
-namespace Supermarket.Business.Tests
+namespace Supermarket.Business.Tests.Services
 {
     [TestFixture]
     public class BasketServiceTests
@@ -30,7 +28,7 @@ namespace Supermarket.Business.Tests
         }
 
         [Test]
-        public void GetDetail_Success()
+        public void GetDetail_ValidRequest_Success()
         {
             // arrange
             var response = new Response<Basket>()
@@ -49,7 +47,7 @@ namespace Supermarket.Business.Tests
         }
 
         [Test]
-        public void Remove_Failed()
+        public void Remove_InvalidRequest_Failed()
         {
             // arrange
             var response = new Response<bool>()
@@ -68,7 +66,7 @@ namespace Supermarket.Business.Tests
         }
 
         [Test]
-        public void Remove_Success()
+        public void Remove_ValidRequest_Success()
         {
             // arrange
             var response = new Response<bool>()
@@ -88,7 +86,7 @@ namespace Supermarket.Business.Tests
         }
 
         [Test]
-        public void CompleteOrder_Failed()
+        public void CompleteOrder_InvalidRequest_Failed()
         {
             // arrange
             var response = new Response<bool>()
@@ -106,7 +104,7 @@ namespace Supermarket.Business.Tests
         }
 
         [Test]
-        public void CompleteOrder_Success()
+        public void CompleteOrder_ValidRequest_Success()
         {
             // arrange
             var response = new Response<bool>()
@@ -114,7 +112,7 @@ namespace Supermarket.Business.Tests
                 SuccessMessage = "Order completed successfully",
                 IsSucceed = true
             };
-            var basket =new Basket()
+            var basket = new Basket()
             {
                 IsActive = true,
                 CreatedDate = DateTime.Now,

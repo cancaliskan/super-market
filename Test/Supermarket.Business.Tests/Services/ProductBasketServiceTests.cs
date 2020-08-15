@@ -1,15 +1,13 @@
 ﻿using System;
-
 using Moq;
 using NUnit.Framework;
-
 using Supermarket.Business.Services;
 using Supermarket.Business.Tests.Helpers;
 using Supermarket.Common.Contracts;
 using Supermarket.DataAccess.UnitOfWork;
 using Supermarket.Domain.Entities;
 
-namespace Supermarket.Business.Tests
+namespace Supermarket.Business.Tests.Services
 {
     [TestFixture]
     public class ProductBasketServiceTests

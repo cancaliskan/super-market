@@ -65,21 +65,15 @@ namespace Supermarket.Business.Services
 
                 if (password != CryptoHelper.Decrypt(user.Password))
                 {
-                    return _responseHelper.FailResponse("Invalid password");
+                    return _responseHelper.FailResponse("Wrong password");
                 }
 
                 return _responseHelper.SuccessResponse(user, "Returned user successfully");
-
             }
             catch (Exception e)
             {
                 return _responseHelper.FailResponse(e.ToString());
             }
-        }
-
-        public Response<IEnumerable<User>> GetAll()
-        {
-            throw new System.NotImplementedException();
         }
 
         public Response<User> Add(User entity)
@@ -99,16 +93,6 @@ namespace Supermarket.Business.Services
             {
                 return _responseHelper.FailResponse(e.ToString());
             }
-        }
-
-        public Response<User> Update(User entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Response<bool> Remove(Guid id)
-        {
-            throw new System.NotImplementedException();
         }
 
         public Response<User> GetUserByEmail(string eMail)
@@ -144,6 +128,11 @@ namespace Supermarket.Business.Services
             else if (entity.LastName.IsEmpty())
             {
                 response = _responseHelper.FailResponse("Last Name is mandatory");
+                return true;
+            }
+            else if (entity.Password.IsNotValidPassword())
+            {
+                response = _responseHelper.FailResponse("Password must have 1 big, 1 small, 1 number and be minimum 8 character");
                 return true;
             }
             else if (entity.Email.IsNotEmail())
