@@ -108,9 +108,6 @@ namespace Supermarket.DataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -139,7 +136,7 @@ namespace Supermarket.DataAccess.Migrations
                         new
                         {
                             Id = new Guid("eb6262bd-bac4-4fac-afcb-34c2774d22c2"),
-                            CreatedDate = new DateTime(2020, 8, 14, 17, 43, 54, 828, DateTimeKind.Local).AddTicks(5486),
+                            CreatedDate = new DateTime(2020, 8, 15, 18, 21, 35, 725, DateTimeKind.Local).AddTicks(9892),
                             Description = "Test Product",
                             IsActive = true,
                             Name = "Product Name",
@@ -261,12 +258,12 @@ namespace Supermarket.DataAccess.Migrations
                         {
                             Id = new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"),
                             Address = "Karşıyaka",
-                            CreatedDate = new DateTime(2020, 8, 14, 17, 43, 54, 825, DateTimeKind.Local).AddTicks(7266),
+                            CreatedDate = new DateTime(2020, 8, 15, 18, 21, 35, 722, DateTimeKind.Local).AddTicks(4419),
                             Email = "cancaliskan@windowslive.com",
                             IsActive = true,
                             LastName = "Çalışkan",
                             Name = "Can",
-                            Password = "25yuVJZAVTha6HPbxSwaGC8Kwp4XhCCHKO6gN0Q+hnM="
+                            Password = "HRClsViud5InpWe5GZLwuAu0xQn7SszOxH/YJn5Zq/M="
                         });
                 });
 
@@ -288,7 +285,7 @@ namespace Supermarket.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("Supermarket.Domain.Entities.SalesInformation", "SalesInformation")
-                        .WithMany("Products")
+                        .WithMany("Orders")
                         .HasForeignKey("SalesInformationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

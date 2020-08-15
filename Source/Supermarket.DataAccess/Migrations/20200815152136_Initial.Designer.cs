@@ -10,7 +10,7 @@ using Supermarket.DataAccess.Context;
 namespace Supermarket.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200814151808_Initial")]
+    [Migration("20200815152136_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,9 +110,6 @@ namespace Supermarket.DataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -141,7 +138,7 @@ namespace Supermarket.DataAccess.Migrations
                         new
                         {
                             Id = new Guid("eb6262bd-bac4-4fac-afcb-34c2774d22c2"),
-                            CreatedDate = new DateTime(2020, 8, 14, 18, 18, 7, 717, DateTimeKind.Local).AddTicks(7863),
+                            CreatedDate = new DateTime(2020, 8, 15, 18, 21, 35, 725, DateTimeKind.Local).AddTicks(9892),
                             Description = "Test Product",
                             IsActive = true,
                             Name = "Product Name",
@@ -263,12 +260,12 @@ namespace Supermarket.DataAccess.Migrations
                         {
                             Id = new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"),
                             Address = "Karşıyaka",
-                            CreatedDate = new DateTime(2020, 8, 14, 18, 18, 7, 715, DateTimeKind.Local).AddTicks(2053),
+                            CreatedDate = new DateTime(2020, 8, 15, 18, 21, 35, 722, DateTimeKind.Local).AddTicks(4419),
                             Email = "cancaliskan@windowslive.com",
                             IsActive = true,
                             LastName = "Çalışkan",
                             Name = "Can",
-                            Password = "6ocWCYBogELTwKcI3Yd3TBZgq40YHcvdwqlGO/GmeCE="
+                            Password = "HRClsViud5InpWe5GZLwuAu0xQn7SszOxH/YJn5Zq/M="
                         });
                 });
 

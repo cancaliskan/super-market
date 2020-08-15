@@ -113,7 +113,6 @@ namespace Supermarket.Business.Services
                     existProduct.Stock = entity.Stock;
                     existProduct.UnitPrice = entity.UnitPrice;
                     existProduct.Description = entity.Description;
-                    existProduct.Image = entity.Image;
                     result.Result = existProduct;
 
                     _unitOfWork.ProductRepository.Update(existProduct);

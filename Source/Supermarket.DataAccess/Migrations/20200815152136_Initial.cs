@@ -88,7 +88,6 @@ namespace Supermarket.DataAccess.Migrations
                     Stock = table.Column<int>(nullable: false),
                     UnitPrice = table.Column<decimal>(nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    Image = table.Column<byte[]>(nullable: true),
                     BasketId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
@@ -165,13 +164,13 @@ namespace Supermarket.DataAccess.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "BasketId", "CreatedDate", "DeletedDate", "Description", "Image", "IsActive", "Name", "Stock", "Type", "UnitPrice", "UpdateDate" },
-                values: new object[] { new Guid("eb6262bd-bac4-4fac-afcb-34c2774d22c2"), null, new DateTime(2020, 8, 14, 18, 18, 7, 717, DateTimeKind.Local).AddTicks(7863), null, "Test Product", null, true, "Product Name", 5, "Phone", 99m, null });
+                columns: new[] { "Id", "BasketId", "CreatedDate", "DeletedDate", "Description", "IsActive", "Name", "Stock", "Type", "UnitPrice", "UpdateDate" },
+                values: new object[] { new Guid("eb6262bd-bac4-4fac-afcb-34c2774d22c2"), null, new DateTime(2020, 8, 15, 18, 21, 35, 725, DateTimeKind.Local).AddTicks(9892), null, "Test Product", true, "Product Name", 5, "Phone", 99m, null });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Address", "CreatedDate", "DeletedDate", "Email", "IsActive", "LastName", "Name", "Password", "Phone", "UpdateDate" },
-                values: new object[] { new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"), "Karşıyaka", new DateTime(2020, 8, 14, 18, 18, 7, 715, DateTimeKind.Local).AddTicks(2053), null, "cancaliskan@windowslive.com", true, "Çalışkan", "Can", "6ocWCYBogELTwKcI3Yd3TBZgq40YHcvdwqlGO/GmeCE=", null, null });
+                values: new object[] { new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"), "Karşıyaka", new DateTime(2020, 8, 15, 18, 21, 35, 722, DateTimeKind.Local).AddTicks(4419), null, "cancaliskan@windowslive.com", true, "Çalışkan", "Can", "HRClsViud5InpWe5GZLwuAu0xQn7SszOxH/YJn5Zq/M=", null, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Baskets_UserId",
