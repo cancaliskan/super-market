@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+using AutoMapper;
+
 using Supermarket.Business.Contracts;
 using Supermarket.Web.Models;
 

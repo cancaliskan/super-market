@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Supermarket.DataAccess.Contracts;
 
 namespace Supermarket.DataAccess.UnitOfWork

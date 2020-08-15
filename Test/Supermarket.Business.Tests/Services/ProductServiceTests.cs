@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using Moq;
 using NUnit.Framework;
+
 using Supermarket.Business.Services;
 using Supermarket.Business.Tests.Helpers;
 using Supermarket.Common.Contracts;

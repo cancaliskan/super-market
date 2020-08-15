@@ -1,6 +1,8 @@
 ﻿using System;
+
 using Moq;
 using NUnit.Framework;
+
 using Supermarket.Business.Services;
 using Supermarket.Business.Tests.Helpers;
 using Supermarket.Common.Contracts;
@@ -65,7 +67,6 @@ namespace Supermarket.Business.Tests.Services
             // assert
             _assertHelperBoolean.Assertion(response, result);
         }
-
 
         [Test]
         public void AddToBasket_ProductRepository_Success()

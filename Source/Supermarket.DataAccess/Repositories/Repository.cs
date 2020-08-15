@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
+
 using Supermarket.DataAccess.Contracts;
 using Supermarket.Domain.Entities;
 

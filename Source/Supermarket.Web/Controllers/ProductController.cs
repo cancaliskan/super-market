@@ -1,12 +1,13 @@
-﻿using System;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Supermarket.Business.Contracts;
 using Supermarket.Web.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+
+using AutoMapper;
+
 using Supermarket.Common.Helpers;
 using Supermarket.Domain.Entities;
 

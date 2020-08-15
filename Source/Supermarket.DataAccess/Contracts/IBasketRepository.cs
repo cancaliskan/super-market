@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Supermarket.Domain.Entities;
 
 namespace Supermarket.DataAccess.Contracts

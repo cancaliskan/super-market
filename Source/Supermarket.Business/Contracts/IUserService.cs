@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using Supermarket.Common.Contracts;
 using Supermarket.Domain.Entities;

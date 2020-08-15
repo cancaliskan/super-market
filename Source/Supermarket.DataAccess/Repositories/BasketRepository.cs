@@ -8,7 +8,7 @@ using Supermarket.Domain.Entities;
 
 namespace Supermarket.DataAccess.Repositories
 {
-    public class BasketRepository : Repository<Basket>, IBasketRepository
+    public sealed class BasketRepository : Repository<Basket>, IBasketRepository
     {
         public ApplicationDbContext ApplicationContext => Context as ApplicationDbContext;
 

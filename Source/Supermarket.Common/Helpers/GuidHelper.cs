@@ -54,6 +54,5 @@ namespace Supermarket.Common.Helpers
         {
             return new Guid(guid);
         }
-
     }
 }

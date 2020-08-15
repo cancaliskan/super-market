@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Supermarket.Common.Contracts;
 using Supermarket.Domain.Entities;
 

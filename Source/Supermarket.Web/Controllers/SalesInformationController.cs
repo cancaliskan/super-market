@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+
+using AutoMapper;
+
 using Supermarket.Business.Contracts;
 using Supermarket.Common.Helpers;
 using Supermarket.Web.Models;

@@ -16,7 +16,6 @@ namespace Supermarket.Web.Controllers
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
 
-
         public UserController(IMapper mapper, IUserService userService)
         {
             _mapper = mapper;

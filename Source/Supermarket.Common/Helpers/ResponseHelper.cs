@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Supermarket.Common.Contracts;
+﻿using Supermarket.Common.Contracts;
 
 namespace Supermarket.Common.Helpers
 {

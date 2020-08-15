@@ -1,6 +1,8 @@
 ﻿using System;
+
 using Moq;
 using NUnit.Framework;
+
 using Supermarket.Business.Services;
 using Supermarket.Business.Tests.Helpers;
 using Supermarket.Common.Contracts;

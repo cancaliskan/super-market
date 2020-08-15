@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using Supermarket.DataAccess.Context;
 using Supermarket.DataAccess.Contracts;
 using Supermarket.Domain.Entities;
 
 namespace Supermarket.DataAccess.Repositories
 {
-    public class OrderProductInformationRepository : Repository<OrderProductInformation>, IOrderProductInformationRepository
+    public sealed class OrderProductInformationRepository : Repository<OrderProductInformation>, IOrderProductInformationRepository
     {
         public ApplicationDbContext ApplicationContext => Context as ApplicationDbContext;
 
