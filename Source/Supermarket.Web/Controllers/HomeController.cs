@@ -23,8 +23,14 @@ namespace Supermarket.Web.Controllers
         public IActionResult Index()
         {
             var response = _productService.GetRecentlyAddedProducts();
-            var model = _mapper.Map<List<ProductViewModel>>(response.Result);
-            return View(model);
+            if (response.IsSucceed)
+            {
+                var model = _mapper.Map<List<ProductViewModel>>(response.Result);
+                return View(model);
+            }
+
+            ViewBag.Message = response.ErrorMessage;
+            return View();
         }
     }
 }

@@ -111,7 +111,7 @@ namespace Supermarket.Business.Services
 
                 salesInformation.Orders = orders;
                 _unitOfWork.SalesInformationRepository.Update(salesInformation);
-                var a =_unitOfWork.OrderProductInformationRepository.AddRange(orders);
+                _unitOfWork.OrderProductInformationRepository.AddRange(orders);
                 _unitOfWork.BasketRepository.CompleteOrder(basketId);
                 _unitOfWork.Complete();
 

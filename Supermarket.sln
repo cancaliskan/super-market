@@ -7,15 +7,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{815C1A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{05F6F653-BE56-479F-8424-4C6F73DC5BA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Domain", "Source\Supermarket.Domain\Supermarket.Domain.csproj", "{D1B7624F-0AAE-401B-AE43-3AE1C3528D40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.Domain", "Source\Supermarket.Domain\Supermarket.Domain.csproj", "{D1B7624F-0AAE-401B-AE43-3AE1C3528D40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.DataAccess", "Source\Supermarket.DataAccess\Supermarket.DataAccess.csproj", "{1F677322-824E-4099-B6D6-B6968A904B66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.DataAccess", "Source\Supermarket.DataAccess\Supermarket.DataAccess.csproj", "{1F677322-824E-4099-B6D6-B6968A904B66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Common", "Source\Supermarket.Common\Supermarket.Common.csproj", "{547F08A9-BE12-449E-8315-AE6DDE31192E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.Common", "Source\Supermarket.Common\Supermarket.Common.csproj", "{547F08A9-BE12-449E-8315-AE6DDE31192E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Business", "Source\Supermarket.Business\Supermarket.Business.csproj", "{4B25CA78-FE89-400F-8102-5685A7E5D88F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.Business", "Source\Supermarket.Business\Supermarket.Business.csproj", "{4B25CA78-FE89-400F-8102-5685A7E5D88F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Web", "Source\Supermarket.Web\Supermarket.Web.csproj", "{3AA59FB7-74D0-4ECD-90B0-F330EA72DABE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.Web", "Source\Supermarket.Web\Supermarket.Web.csproj", "{3AA59FB7-74D0-4ECD-90B0-F330EA72DABE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.Web.Tests", "Test\Supermarket.Web.Tests\Supermarket.Web.Tests.csproj", "{60C95651-2175-43C1-BBFA-F94767A302E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Business.Tests", "Test\Supermarket.Business.Tests\Supermarket.Business.Tests.csproj", "{C7E4E1B8-18D0-4C96-A0F7-4A95F97F6C03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +47,14 @@ Global
 		{3AA59FB7-74D0-4ECD-90B0-F330EA72DABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AA59FB7-74D0-4ECD-90B0-F330EA72DABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AA59FB7-74D0-4ECD-90B0-F330EA72DABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60C95651-2175-43C1-BBFA-F94767A302E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60C95651-2175-43C1-BBFA-F94767A302E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60C95651-2175-43C1-BBFA-F94767A302E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60C95651-2175-43C1-BBFA-F94767A302E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7E4E1B8-18D0-4C96-A0F7-4A95F97F6C03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7E4E1B8-18D0-4C96-A0F7-4A95F97F6C03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7E4E1B8-18D0-4C96-A0F7-4A95F97F6C03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7E4E1B8-18D0-4C96-A0F7-4A95F97F6C03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +65,8 @@ Global
 		{547F08A9-BE12-449E-8315-AE6DDE31192E} = {815C1AC4-BFEC-4CCD-BCAC-AF269479D520}
 		{4B25CA78-FE89-400F-8102-5685A7E5D88F} = {815C1AC4-BFEC-4CCD-BCAC-AF269479D520}
 		{3AA59FB7-74D0-4ECD-90B0-F330EA72DABE} = {815C1AC4-BFEC-4CCD-BCAC-AF269479D520}
+		{60C95651-2175-43C1-BBFA-F94767A302E2} = {05F6F653-BE56-479F-8424-4C6F73DC5BA5}
+		{C7E4E1B8-18D0-4C96-A0F7-4A95F97F6C03} = {05F6F653-BE56-479F-8424-4C6F73DC5BA5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {126CA5F2-2C69-41BD-82A1-46B21D0D8416}

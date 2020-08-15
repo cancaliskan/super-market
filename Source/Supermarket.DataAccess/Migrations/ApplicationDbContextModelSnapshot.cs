@@ -139,7 +139,7 @@ namespace Supermarket.DataAccess.Migrations
                         new
                         {
                             Id = new Guid("eb6262bd-bac4-4fac-afcb-34c2774d22c2"),
-                            CreatedDate = new DateTime(2020, 8, 14, 18, 18, 7, 717, DateTimeKind.Local).AddTicks(7863),
+                            CreatedDate = new DateTime(2020, 8, 14, 17, 43, 54, 828, DateTimeKind.Local).AddTicks(5486),
                             Description = "Test Product",
                             IsActive = true,
                             Name = "Product Name",
@@ -261,12 +261,12 @@ namespace Supermarket.DataAccess.Migrations
                         {
                             Id = new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"),
                             Address = "Karşıyaka",
-                            CreatedDate = new DateTime(2020, 8, 14, 18, 18, 7, 715, DateTimeKind.Local).AddTicks(2053),
+                            CreatedDate = new DateTime(2020, 8, 14, 17, 43, 54, 825, DateTimeKind.Local).AddTicks(7266),
                             Email = "cancaliskan@windowslive.com",
                             IsActive = true,
                             LastName = "Çalışkan",
                             Name = "Can",
-                            Password = "6ocWCYBogELTwKcI3Yd3TBZgq40YHcvdwqlGO/GmeCE="
+                            Password = "25yuVJZAVTha6HPbxSwaGC8Kwp4XhCCHKO6gN0Q+hnM="
                         });
                 });
 
@@ -288,7 +288,7 @@ namespace Supermarket.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("Supermarket.Domain.Entities.SalesInformation", "SalesInformation")
-                        .WithMany("Orders")
+                        .WithMany("Products")
                         .HasForeignKey("SalesInformationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
