@@ -1,0 +1,115 @@
+﻿@model Supermarket.Web.Models.BasketViewModel
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_TableLayout.cshtml";
+}
+
+<h2>Basket Detail</h2>
+<hr />
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-warning" role="alert">
+        @ViewBag.Message
+    </div>
+}
+<div class="tableStyle">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="display" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Unit Price</th>
+                            <th>Count</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var record in Model.Products)
+                        {
+                            <tr>
+                                <td>@record.Name</td>
+                                <td>@record.UnitPrice</td>
+                                <td>@record.Count</td>
+                                <td>@record.Total</td>
+
+                                <td style="text-align: center; width: 20%">
+                                    @Html.ActionLink("Detail", "Detail", "Product", new { id = record.Id }, new { @class = "btn btn-round btn-default" })
+                                    <a data-id=@record.Id class="open-AddBookDialog btn btn-round btn-danger" href="#addBookDialog">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<hr />
+<br />
+
+@if (Model.ProductCount > 0)
+{
+    <div style="display: flex; justify-content: center;">
+        <table style="width: 50%; font-size: large;">
+            <thead>
+                <tr>
+                    <th>Total Product Count</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.ProductCount</td>
+                    <td>@Model.TotalPrice</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr />
+    @using (Html.BeginForm("CompleteOrder", "Basket", new { id = Model.Id }, FormMethod.Post))
+    {
+        <input type="hidden" name="productId" id="BasketViewModel" value="" />
+        <div style="display: flex; justify-content: center; ">
+            <button type="submit" class="btn btn-success btn-lg">Complete Order</button>
+        </div>
+    }
+}
+
+
+<div class="modal fade" id="addBookDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Confirm to delete</h4>
+            </div>
+            @using (Html.BeginForm("Remove", "Basket", FormMethod.Post))
+            {
+                <input type="hidden" name="productId" id="productId" value="" />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).on("click", ".open-AddBookDialog", function (e) {
+
+        e.preventDefault();
+
+        var _self = $(this);
+
+        var myProductId = _self.data('id');
+        $("#productId").val(myProductId);
+
+        $(_self.attr('href')).modal('show');
+    });
+</script>

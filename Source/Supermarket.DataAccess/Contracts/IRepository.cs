@@ -7,7 +7,8 @@ namespace Supermarket.DataAccess.Contracts
     {
         T GetById(Guid id);
         IEnumerable<T> GetAll();
-        void Add(T entity);
+        T Add(T entity);
+        List<T> AddRange(List<T> entities);
         void Update(T entity);
         void Remove(Guid id);
         void Remove(T entity);

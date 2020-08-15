@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Supermarket.Common.Contracts;
+﻿using Supermarket.Common.Contracts;
 
 namespace Supermarket.Common.Helpers
 {
@@ -23,6 +21,17 @@ namespace Supermarket.Common.Helpers
                 IsSucceed = true,
                 SuccessMessage = successMessage,
                 Result = result
+            };
+
+            return response;
+        }
+
+        public Response<T> SuccessResponse(string successMessage)
+        {
+            var response = new Response<T>
+            {
+                IsSucceed = true,
+                SuccessMessage = successMessage,
             };
 
             return response;

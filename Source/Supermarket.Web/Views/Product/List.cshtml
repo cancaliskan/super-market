@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Supermarket.Web.Models.ProductViewModel>
+
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_TableLayout.cshtml";
+}
+
+<div>
+    <a href="../Product/Add"><input type="button" value="Add New Product" class="btn btn-success" /></a>
+</div>
+
+<div class="tableStyle">
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @ViewBag.Message
+        </div>
+    }
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="display" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Type</th>
+                            <th>Unit Price</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var record in Model)
+                        {
+                            <tr>
+                                <td>@record.Name</td>
+                                <td>@record.Type</td>
+                                <td>@record.UnitPrice</td>
+
+                                <td style="text-align: center; width: 20%">
+                                    @Html.ActionLink("Edit", "Edit", new { id = record.Id }, new { @class = "btn btn-round btn-dark" })
+                                    @Html.ActionLink("Detail", "Detail", new { id = record.Id }, new { @class = "btn btn-round btn-default" })
+                                    <a data-id=@record.Id class="open-AddBookDialog btn btn-round btn-danger" href="#addBookDialog">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addBookDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Confirm to delete</h4>
+            </div>
+            @using (Html.BeginForm("Delete", "Product", FormMethod.Post))
+            {
+                <input type="hidden" name="productId" id="productId" value="" />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).on("click", ".open-AddBookDialog", function (e) {
+
+        e.preventDefault();
+
+        var _self = $(this);
+
+        var myProductId = _self.data('id');
+        $("#productId").val(myProductId);
+
+        $(_self.attr('href')).modal('show');
+    });
+</script>

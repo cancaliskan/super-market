@@ -3,9 +3,23 @@
 
 <h3>Menu</h3>
 <ul class="nav side-menu">
-        <li>
-            <a href="../Home/Index"><i class="fa fa-edit"></i> Home Page</a>
-            <a href="../Product/List"><i class="fa fa-edit"></i> Product List</a>
-            <a href="../Basket/Index"><i class="fa fa-edit"></i> Basket</a>
-        </li>
+    <li>
+        @Html.ActionLink("Home Page", "Index", "Home")
+    </li>
+
+    <li>
+        <a>Product <span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+            <li>
+                @Html.ActionLink("Add", "Add", "Product")
+            </li>
+            <li>
+                @Html.ActionLink("List", "List", "Product")
+            </li>
+        </ul>
+    </li>
+
+    <li>
+        @Html.ActionLink("Basket Detail", "Detail", "Basket")
+    </li>
 </ul>

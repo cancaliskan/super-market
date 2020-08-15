@@ -1,13 +1,13 @@
 using System;
-using AutoMapper;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
+using AutoMapper;
+
 using Supermarket.Business.Contracts;
 using Supermarket.Business.Services;
 using Supermarket.DataAccess.Context;
@@ -33,6 +33,10 @@ namespace Supermarket.Web
 
             #region Services
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IProductBasketService, ProductBasketService>();
+            services.AddTransient<IBasketService, BasketService>();
+            services.AddTransient<ISalesInformationService, SalesInformationService>();
             #endregion
 
             #region UnitOfWork
@@ -45,12 +49,16 @@ namespace Supermarket.Web
 
             #endregion
 
+            #region Authentication
+
             services.AddAuthentication("CookieAuthentication")
                 .AddCookie("CookieAuthentication", config =>
                 {
                     config.Cookie.Name = "UserLoginCookie";
                     config.LoginPath = "/User/Login";
                 });
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

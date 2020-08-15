@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Supermarket.Common.Helpers;
+
 using Supermarket.DataAccess.Contracts;
 using Supermarket.Domain.Entities;
 
@@ -21,25 +21,39 @@ namespace Supermarket.DataAccess.Repositories
 
         public T GetById(Guid id)
         {
-            return _dbSet.FirstOrDefault(x=> x.Id == id && x.IsActive);
+            return _dbSet.FirstOrDefault(x => x.Id == id && x.IsActive);
         }
 
         public IEnumerable<T> GetAll()
         {
-            return _dbSet.ToList().Where(x=>x.IsActive);
+            return _dbSet.ToList().Where(x => x.IsActive);
         }
 
-        public void Add(T entity)
+        public T Add(T entity)
         {
-            entity.Id = new Guid(GuidHelper.GetNewUid());
+            entity.Id = Guid.NewGuid();
             entity.IsActive = true;
-            entity.CreatedDate=DateTime.Now;
+            entity.CreatedDate = DateTime.Now;
             _dbSet.Add(entity);
+            return entity;
+        }
+
+        public List<T> AddRange(List<T> entities)
+        {
+            entities.ForEach(x =>
+            {
+                x.Id = Guid.NewGuid();
+                x.IsActive = true;
+                x.CreatedDate=DateTime.Now;
+            });
+
+            _dbSet.AddRange(entities);
+            return entities;
         }
 
         public void Update(T entity)
         {
-            entity.UpdateDate=DateTime.Now;
+            entity.UpdateDate = DateTime.Now;
             _dbSet.Update(entity);
         }
 
@@ -47,10 +61,10 @@ namespace Supermarket.DataAccess.Repositories
         {
             _dbSet.Remove(GetById(id));
         }
-        
+
         public void Remove(T entity)
         {
-            entity.DeletedDate=DateTime.Now;
+            entity.DeletedDate = DateTime.Now;
             entity.IsActive = false;
             Update(entity);
         }

@@ -8,6 +8,7 @@ namespace Supermarket.Domain.Entities
         public Guid UserId { get; set; }
         public User User { get; set; }
 
+        public IList<Product> Products { get; set; }
         public IList<ProductBasket> ProductBasket { get; set; }
     }
 }

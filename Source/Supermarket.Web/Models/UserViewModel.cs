@@ -1,6 +1,6 @@
 ﻿namespace Supermarket.Web.Models
 {
-    public class UserViewModel
+    public sealed class UserViewModel
     {
         public string Name { get; set; }
         public string LastName { get; set; }

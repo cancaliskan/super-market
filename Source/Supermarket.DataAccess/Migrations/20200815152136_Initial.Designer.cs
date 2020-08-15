@@ -10,7 +10,7 @@ using Supermarket.DataAccess.Context;
 namespace Supermarket.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200811100151_Initial")]
+    [Migration("20200815152136_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,11 +50,14 @@ namespace Supermarket.DataAccess.Migrations
                     b.ToTable("Baskets");
                 });
 
-            modelBuilder.Entity("Supermarket.Domain.Entities.Product", b =>
+            modelBuilder.Entity("Supermarket.Domain.Entities.OrderProductInformation", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -65,17 +68,90 @@ namespace Supermarket.DataAccess.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SalesInformationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("SalesInformationId");
+
+                    b.ToTable("OrderProductInformation");
+                });
+
+            modelBuilder.Entity("Supermarket.Domain.Entities.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BasketId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BasketId");
+
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("eb6262bd-bac4-4fac-afcb-34c2774d22c2"),
+                            CreatedDate = new DateTime(2020, 8, 15, 18, 21, 35, 725, DateTimeKind.Local).AddTicks(9892),
+                            Description = "Test Product",
+                            IsActive = true,
+                            Name = "Product Name",
+                            Stock = 5,
+                            Type = "Phone",
+                            UnitPrice = 99m
+                        });
                 });
 
             modelBuilder.Entity("Supermarket.Domain.Entities.ProductBasket", b =>
                 {
-                    b.Property<Guid>("ProductId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("BasketId")
@@ -87,18 +163,20 @@ namespace Supermarket.DataAccess.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("ProductId", "BasketId");
+                    b.HasKey("Id");
 
                     b.HasIndex("BasketId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("ProductBaskets");
                 });
@@ -117,6 +195,12 @@ namespace Supermarket.DataAccess.Migrations
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<int>("TotalItem")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
@@ -176,12 +260,12 @@ namespace Supermarket.DataAccess.Migrations
                         {
                             Id = new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"),
                             Address = "Karşıyaka",
-                            CreatedDate = new DateTime(2020, 8, 11, 13, 1, 50, 720, DateTimeKind.Local).AddTicks(8496),
+                            CreatedDate = new DateTime(2020, 8, 15, 18, 21, 35, 722, DateTimeKind.Local).AddTicks(4419),
                             Email = "cancaliskan@windowslive.com",
                             IsActive = true,
                             LastName = "Çalışkan",
                             Name = "Can",
-                            Password = "MWlM+4K+pIAXuaGb7UcCQFpqckwSt/wll9W1Ytu0wwY="
+                            Password = "HRClsViud5InpWe5GZLwuAu0xQn7SszOxH/YJn5Zq/M="
                         });
                 });
 
@@ -194,6 +278,28 @@ namespace Supermarket.DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Supermarket.Domain.Entities.OrderProductInformation", b =>
+                {
+                    b.HasOne("Supermarket.Domain.Entities.Product", "Product")
+                        .WithMany("Orders")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Supermarket.Domain.Entities.SalesInformation", "SalesInformation")
+                        .WithMany("Orders")
+                        .HasForeignKey("SalesInformationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Supermarket.Domain.Entities.Product", b =>
+                {
+                    b.HasOne("Supermarket.Domain.Entities.Basket", null)
+                        .WithMany("Products")
+                        .HasForeignKey("BasketId");
+                });
+
             modelBuilder.Entity("Supermarket.Domain.Entities.ProductBasket", b =>
                 {
                     b.HasOne("Supermarket.Domain.Entities.Basket", "Basket")
@@ -203,7 +309,7 @@ namespace Supermarket.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("Supermarket.Domain.Entities.Product", "Product")
-                        .WithMany("ProductBaskets")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

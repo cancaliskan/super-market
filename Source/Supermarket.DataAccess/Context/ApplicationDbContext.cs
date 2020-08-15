@@ -13,6 +13,7 @@ namespace Supermarket.DataAccess.Context
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductBasket> ProductBaskets { get; set; }
+        public DbSet<OrderProductInformation> OrderProductInformation { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -34,9 +35,11 @@ namespace Supermarket.DataAccess.Context
                         .WithOne(x => x.User)
                         .HasForeignKey<Basket>(x => x.UserId);
 
-            // One Product has many Baskets
-            // One Basket has many Products
-            modelBuilder.Entity<ProductBasket>().HasKey(x => new { x.ProductId, x.BasketId });
+            //// One Order Product Information has one Product
+            //modelBuilder.Entity<OrderProductInformation>()
+            //            .HasOne(x => x.Product)
+            //            .WithMany(x => x.Orders)
+            //            .HasForeignKey(x => x.ProductId);
 
             // Seed Data
             var password = CryptoHelper.Encrypt("Test+-1234*");
@@ -52,6 +55,17 @@ namespace Supermarket.DataAccess.Context
                 IsActive = true
             };
             modelBuilder.Entity<User>().HasData(user);
+            modelBuilder.Entity<Product>().HasData(new Product()
+            {
+                Id = new Guid("eb6262bd-bac4-4fac-afcb-34c2774d22c2"),
+                IsActive = true,
+                CreatedDate = DateTime.Now,
+                Description = "Test Product",
+                Name = "Product Name",
+                Type = "Phone",
+                Stock = 5,
+                UnitPrice = 99
+            });
 
             base.OnModelCreating(modelBuilder);
         }

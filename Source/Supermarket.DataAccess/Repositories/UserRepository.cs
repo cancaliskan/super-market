@@ -7,7 +7,7 @@ using Supermarket.Domain.Entities;
 
 namespace Supermarket.DataAccess.Repositories
 {
-    public class UserRepository : Repository<User>, IUserRepository
+    public sealed class UserRepository : Repository<User>, IUserRepository
     {
         public ApplicationDbContext ApplicationContext => Context as ApplicationDbContext;
 

@@ -1,0 +1,63 @@
+﻿@model Supermarket.Web.Models.SalesInformationViewModel
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_TableLayout.cshtml";
+}
+
+<h2>Order Detail</h2>
+<hr />
+<div class="tableStyle">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="display" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Unit Price</th>
+                            <th>Count</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var record in Model.Orders)
+                        {
+                            <tr>
+                                <td>@record.Product.Name</td>
+                                <td>@record.UnitPrice</td>
+                                <td>@record.Count</td>
+                                <td>@record.TotalPrice</td>
+
+                                <td style="text-align: center; width: 20%">
+                                    @Html.ActionLink("Detail", "Detail", "Product", new { id = record.ProductId }, new { @class = "btn btn-round btn-default" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model.TotalItem > 0)
+{
+    <hr />
+    <div style="display: flex; justify-content: center;">
+        <table style="width: 50%; font-size: large;">
+            <thead>
+                <tr>
+                    <th>Total Product Count</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.TotalItem</td>
+                    <td>@Model.TotalPrice</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}

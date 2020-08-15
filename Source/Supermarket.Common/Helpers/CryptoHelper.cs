@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -8,7 +7,7 @@ namespace Supermarket.Common.Helpers
 {
     public static class CryptoHelper
     {
-        private static string key = "E546C8DF278CD5931069B522E695D4F2";
+        private static readonly string key = "E546C8DF278CD5931069B522E695D4F2";
         public static string Encrypt(string text)
         {
             var _key = Encoding.UTF8.GetBytes(key);
