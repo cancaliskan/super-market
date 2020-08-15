@@ -163,10 +163,6 @@ namespace Supermarket.Business.Services
             {
                 return _responseHelper.FailResponse("UnitPrice must be greater than 0");
             }
-            else if (entity.Image == null)
-            {
-                return _responseHelper.FailResponse("Image is mandatory");
-            }
             else if (entity.Type.IsEmpty())
             {
                 return _responseHelper.FailResponse("Type is mandatory");
