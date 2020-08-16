@@ -36,7 +36,7 @@ namespace Supermarket.DataAccess.Context
                         .HasForeignKey<Basket>(x => x.UserId);
 
             // Seed Data
-            var password = CryptoHelper.Encrypt("Test+-1234*");
+            var password = CryptoHelper.Encrypt("Test-+1234*");
             var user = new User
             {
                 Id = new Guid("a8ee7c28-e825-48d0-9cca-c2327c5786ea"),
