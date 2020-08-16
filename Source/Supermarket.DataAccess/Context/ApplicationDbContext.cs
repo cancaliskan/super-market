@@ -35,12 +35,6 @@ namespace Supermarket.DataAccess.Context
                         .WithOne(x => x.User)
                         .HasForeignKey<Basket>(x => x.UserId);
 
-            //// One Order Product Information has one Product
-            //modelBuilder.Entity<OrderProductInformation>()
-            //            .HasOne(x => x.Product)
-            //            .WithMany(x => x.Orders)
-            //            .HasForeignKey(x => x.ProductId);
-
             // Seed Data
             var password = CryptoHelper.Encrypt("Test+-1234*");
             var user = new User
